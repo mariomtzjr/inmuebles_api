@@ -30,3 +30,14 @@ Ejercicio de una herramienta en la que los usuarios puedan consultar los inmuebl
     - Precio de venta
     - Descripción
 
+### Dudas
+1. ¿Cómo limito las búsquedas de acuerdo al número de parámetros en el query string con el ORM?
+    - or para buscar por city o state o year
+    - validaciones de acuerdo a los argumentos? *** Solución
+
+2. Cambios:
+    - Añadir campo state
+        ALTER TABLE habi_db.property
+        ADD COLUMN state VARCHAR(50) AFTER address;
+
+
