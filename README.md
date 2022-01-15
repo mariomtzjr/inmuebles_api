@@ -40,4 +40,53 @@ Ejercicio de una herramienta en la que los usuarios puedan consultar los inmuebl
         ALTER TABLE habi_db.property
         ADD COLUMN state VARCHAR(50) AFTER address;
 
+3. Problemas
+    - Autodocumentación no se genera de forma correcta
+        - Fuentes consultadas:
+            - https://sphinx-rtd-tutorial.readthedocs.io/en/latest/docstrings.html
+            - https://eikonomega.medium.com/getting-started-with-sphinx-autodoc-part-1-2cebbbca5365
+            - https://www.sphinx-doc.org/
+            - https://www.youtube.com/watch?v=b4iFyrLQQh4
+        - Comentarios:
+            - Probé con diferentes estructuras de archivos, obtuve el mismo resultado
+
+### Estructura de archivos
+
+Actual
+```
+.
+├── LICENSE
+├── README.md
+├── app.py
+├── docs/
+├── database
+│   ├── __init__.py
+│   ├── __pycache__
+│   │   ├── __init__.cpython-310.pyc
+│   │   ├── db.cpython-310.pyc
+│   │   └── models.cpython-310.pyc
+│   ├── db.py
+│   └── models.py
+├── requirements.txt
+└── utils
+    ├── __init__.py
+    ├── __pycache__
+    │   ├── __init__.cpython-310.pyc
+    │   └── utils.cpython-310.pyc
+    └── utils.py
+```  
+
+Anterior
+```
+.
+├── LICENSE
+├── README.md
+├── app.py
+├── docs/
+├── requirements.txt
+├── models.py
+├── db.py
+└── utils
+``` 
+ 
 
