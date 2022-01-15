@@ -49,7 +49,9 @@ Ejercicio de una herramienta en la que los usuarios puedan consultar los inmuebl
             - https://www.youtube.com/watch?v=b4iFyrLQQh4
         - Comentarios:
             - Probé con diferentes estructuras de archivos, obtuve el mismo resultado
-    SOLUCIONADO: Instalación del tema "sphinx-rtd-theme"
+    SOLUCIONADO:
+        - La autodocumentación no se generaba de manera correcta debido a que no estaba activado el ambiente virtual 
+        - Instalación del tema "sphinx-rtd-theme"
 
 ### Estructura de archivos
 
