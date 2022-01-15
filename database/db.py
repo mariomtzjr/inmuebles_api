@@ -17,14 +17,15 @@ class DB(object):
             source of database connectivity and behavior.
         """
         
+        print("Starting database connection...")
         pool = sqlalchemy.create_engine(
             sqlalchemy.engine.url.URL(
                 drivername="mysql+pymysql",
-                username=os.getenv("DB_USER"),
-                password=os.getenv("DB_PASSWORD"),
-                host=os.getenv("DB_HOST"),
-                port=os.getenv("DB_PORT"),
-                database=os.getenv("DB_NAME")
+                username=os.environ.get("DB_USER"),
+                password=os.environ.get("DB_PASSWORD"),
+                host=os.environ.get("DB_HOST"),
+                port=os.environ.get("DB_PORT"),
+                database=os.environ.get("DB_NAME")
 
             ),
             pool_size=5,
@@ -33,4 +34,7 @@ class DB(object):
             pool_recycle=1800
         )
 
+        print("DB_USER: ", os.environ.get("DB_USER"))
+        print("DB_HOST: ", os.environ.get("DB_HOST"))
+        print("DB_NAME: ", os.environ.get("DB_NAME"))
         return pool

@@ -61,4 +61,4 @@ class PropertyList(Resource):
 api.add_resource(PropertyList, '/api/properties')
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=9091)
+    app.run(host='0.0.0.0', port=9001)
