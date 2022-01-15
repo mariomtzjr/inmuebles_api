@@ -1,7 +1,6 @@
 import os
 
 import sqlalchemy
-import pymysql.cursors
 
 class DB(object):
     uri = None
@@ -13,12 +12,9 @@ class DB(object):
         """This function starts database connection.
         Returns a database connection pool
 
-        parameters:
-            - username: Allowed user to use the database
-            - password: Secure password that user uses
-            - host: IP Address of database
-            - port: Allowed port which database connection is stablished
-            - database: Database name
+        Returns:
+            EngineObject: Connects a Pool and Dialect together to provide a 
+            source of database connectivity and behavior.
         """
         
         pool = sqlalchemy.create_engine(

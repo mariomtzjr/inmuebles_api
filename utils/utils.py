@@ -1,10 +1,9 @@
 import json
 
 from sqlalchemy.orm import Session, sessionmaker
-from sqlalchemy.sql.elements import ReleaseSavepointClause
 
 from database.db import DB
-from .models import Property, Status, StatusHistory
+from database.models import Property, Status, StatusHistory
 
 db = DB.init_connection_engine()
 
@@ -16,13 +15,14 @@ def get_result_from_args(args):
     """Returns json result from database using args like filters
     from request args.
 
-    Query parameters:
-        - status: different states that the property has had
-            - valid status: "pre_venta", "en_venta", "vendido"
-            - all status: "comprando", "comprado", "en_venta", "pre_venta", "vendido"
-        - state: Property location
-        - city: Property location into state
-        - year: When property was builded
+    Parameters:
+        status: different states that the property has had. Valid status are "pre_venta", "en_venta", "vendido".
+        state: Property location
+        city: Property location into state
+        year: When property was builded
+
+    Returns:
+        json: result from database using args like filters from request args.
     """
 
     response = {}
