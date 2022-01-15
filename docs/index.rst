@@ -6,6 +6,14 @@
 Welcome to inmuebles_api's documentation!
 =========================================
 
+.. literalinclude:: specs/openapi.yml
+   :language: yaml
+
+.. openapi:: specs/openapi.yml
+
+.. note::
+   This project is under active development.
+
 .. toctree::
    :maxdepth: 2
    :caption: Contents:

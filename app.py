@@ -24,7 +24,7 @@ class PropertyList(Resource):
         Returns:
             json: Json response with list of properties.
         """
-        
+
         parser = reqparse.RequestParser()
         parser.add_argument('city', location='args')
         parser.add_argument('state', location='args')
@@ -61,4 +61,4 @@ class PropertyList(Resource):
 api.add_resource(PropertyList, '/api/properties')
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=105)
+    app.run(host='0.0.0.0', port=9091)

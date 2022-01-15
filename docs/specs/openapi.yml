@@ -1,0 +1,58 @@
+swagger: "2.0"
+info:
+  title: Inmuebles API
+  version: "1.0.0"
+host: http://<ip>:9091/api
+paths:
+  /properties?status={status}:
+    get:
+      summary: List Properties with specific status
+      description: |
+        Retrieves a list of all properties with some status.
+      parameters:
+        - name: status
+          in: path
+          type: string
+          required: true
+      responses:
+        200:
+          description: An array of properties
+  /properties?status={status}&city={city}:
+    get:
+      summary: List Properties with specific status and city
+      description: |
+        Retrieves a list of all properties with some status and city.
+      parameters:
+        - name: status
+          in: path
+          type: string
+          required: true
+        - name: city
+          in: path
+          type: string
+          required: false
+      responses:
+        200:
+          description: An array of properties with specific status city
+  /properties?status={status}&city={city}&year={year}:
+    get:
+      summary: List Properties with specific status and city and year
+      description: |
+        Retrieves a list of all properties with some status and city and year.
+      parameters:
+        - name: status
+          in: path
+          type: string
+          required: true
+        - name: city
+          in: path
+          type: string
+          required: false
+        - name: year
+          in: path
+          type: int
+          required: false
+      responses:
+        200:
+          description: An array of properties with specific status city
+  

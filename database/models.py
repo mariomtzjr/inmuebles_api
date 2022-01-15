@@ -9,28 +9,24 @@ Base = declarative_base()
 
 
 class Property(Base, SerializerMixin):
-    """Property Model
-
-    fields:
-        - id: Unique identifier
-        - address: Property address
-        - state: Property location
-        - city: Property location into state
-        - price: Property price
-        - description: Property description
-        - year: When property was builded
-    """
 
     __tablename__ = 'property'
 
+    #: Unique identifier of Property
     id = Column(Integer, primary_key=True)
+    #: Address where property is located
     address = Column(String(255))
     # state = Column(String(50))  # Does not exist this field into database
+    #: Property location into state
     city = Column(String(36))
+    #: Property price
     price = Column(Integer)
+    #: Property description
     description = Column(String(500))
+    #: When property was builded
     year = Column(Integer)
     # status_history = relationship("StatusHistory", back_populates="property")
+    #: Reference to parent model (StatusHistory)
     status_history = relationship("StatusHistory", backref="property")
 
     def __repr__(self):
@@ -38,20 +34,16 @@ class Property(Base, SerializerMixin):
 
     
 class Status(Base, SerializerMixin):
-    """Status Model
-
-    fields:
-        - id: Unique identifier
-        - name: Status name
-        - label: Status name description
-    """
 
     __tablename__ = 'status'
 
+    #: Unique identifier of Status
     id = Column(Integer, primary_key=True)
+    #: Status name
     name = Column(String(30))
+    #: Status name description
     label = Column(String(255))
-    # status_history = relationship("StatusHistory", back_populates="status")
+    #: Reference to parent model (StatusHistory)
     status_history = relationship("StatusHistory", backref="Status")
 
     def __repr__(self):
@@ -59,20 +51,16 @@ class Status(Base, SerializerMixin):
 
 
 class StatusHistory(Base, SerializerMixin):
-    """StatusHistory Model
-
-    fields:
-        - id: Unique identifier
-        - property_id: Property unique identifier (ForeignKey relationship)
-        - status_id: Status unique identifier (ForeignKey relationship)
-        - update_date: Date when the last property status was updated
-    """
 
     __tablename__ = 'status_history'
 
+    #: Unique identifier (int)
     id = Column(Integer, primary_key=True)
+    #: Property unique identifier (ForeignKey relationship with Property model)
     property_id = Column(Integer, ForeignKey('property.id'))
+    #: Status unique identifier (ForeignKey relationship with Status model)
     status_id = Column(Integer, ForeignKey('status.id'))
+    #: Date when the last property status was updated
     update_date = Column(DateTime)
 
     def __repr__(self):
