@@ -6,6 +6,7 @@ Ejercicio de una herramienta en la que los usuarios puedan consultar los inmuebl
 - Flask 2.0.2
 - Flask-SQLAlchemy 2.5.1
 - Flask-RESTful 0.3.9
+- Docker
 
 ## Implementación
 
@@ -77,6 +78,18 @@ Ejercicio de una herramienta en la que los usuarios puedan consultar los inmuebl
     ) as A
     WHERE A.description IS NOT NULL;
     ```
+
+### Set up sin Docker
+1. Crear un ambiente virtual `python -m venv <nombre_ambiente>`
+2. Activar el ambiente virtual `source <nombre_ambiente/bin/activate>`
+3. En la raiz de la carpeta del proyecto, ejecutamos `python app.py`
+4. Abrir el navegador, y en la url colocamos la dirección ip que genera el servidor
+
+### Setup con Docker
+1. En la raíz de la carpeta del proyecto, ejecutamos:  
+`docker-compose build`  
+`docker-compose up`
+2. Abrir el navegador, y en la url colocamos `localhost:<puerto>/api/properties?status=vendido` para visualizar algún resultado
 
 ### Estructura de archivos
 
