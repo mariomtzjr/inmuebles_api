@@ -31,6 +31,48 @@ Ejercicio de una herramienta en la que los usuarios puedan consultar los inmuebl
     - Precio de venta
     - Descripción
 
+
+
+### Set up sin Docker
+1. Crear un ambiente virtual `python -m venv <nombre_ambiente>`
+2. Activar el ambiente virtual `source <nombre_ambiente/bin/activate>`
+3. En la raiz de la carpeta del proyecto, ejecutamos `python app.py`
+4. Abrir el navegador, y en la url colocamos la dirección ip que genera el servidor
+
+### Setup con Docker
+1. En la raíz de la carpeta del proyecto, ejecutamos:  
+`docker-compose build`  
+`docker-compose up`
+2. Abrir el navegador, y en la url colocamos `localhost:<puerto>/api/properties?status=vendido` para visualizar algún resultado
+
+### Servicio "Me gusta"
+El modelo de ER se encuentra en el archivo inmueble_api_like.png  
+QUERY:
+```
+SELECT
+    p.address,
+    p.city,
+    p.price,
+    p.description,
+    s.name,
+    p.year
+    count(l.property_id) as likes
+FROM status_history sh
+JOIN status s ON s.id = sh.status_id
+JOIN property p ON p.id = sh.property_id
+JOIN like l ON l.property_id = p.id
+WHERE s.name='{}'
+AND (p.address IS NOT NULL OR p.address <> "")
+AND (p.year IS NOT NULL OR p.year <> "")
+AND (p.description IS NOT NULL OR p.description <> "")
+AND (p.price IS NOT NULL OR p.price <> "0" or p.price <> 0)
+AND l.property_id='{property_id}'
+ORDER BY sh.update_date DESC;
+```
+Explicación:  
+El modelo lo extendí mediante una clase User, quien será la entidad que dará "Me gusta". Adicionalmente están los modelos Like y Dislike (este último si también quisiéramos saber a cuántos usuarios no les gusta la propiedad). Tanto el modelo Like como Dislike, están asociados a una propiedad mediante una relación de muchos a muchos y a muchos usuarios. Para saber los determinados likes hacia una propiedad en la claúsula WHERE se debe incluir el id de la propiedad en cuestión.
+
+
 ### Dudas
 1. ¿Cómo limito las búsquedas de acuerdo al número de parámetros en el query string con el ORM?
     - or para buscar por city o state o year
@@ -78,18 +120,6 @@ Ejercicio de una herramienta en la que los usuarios puedan consultar los inmuebl
     ) as A
     WHERE A.description IS NOT NULL;
     ```
-
-### Set up sin Docker
-1. Crear un ambiente virtual `python -m venv <nombre_ambiente>`
-2. Activar el ambiente virtual `source <nombre_ambiente/bin/activate>`
-3. En la raiz de la carpeta del proyecto, ejecutamos `python app.py`
-4. Abrir el navegador, y en la url colocamos la dirección ip que genera el servidor
-
-### Setup con Docker
-1. En la raíz de la carpeta del proyecto, ejecutamos:  
-`docker-compose build`  
-`docker-compose up`
-2. Abrir el navegador, y en la url colocamos `localhost:<puerto>/api/properties?status=vendido` para visualizar algún resultado
 
 ### Estructura de archivos
 

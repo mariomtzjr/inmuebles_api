@@ -20,6 +20,14 @@ database.models module
    :undoc-members:
    :show-inheritance:
 
+database.queries module
+-----------------------
+
+.. automodule:: database.queries
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 Module contents
 ---------------
 
