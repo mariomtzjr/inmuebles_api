@@ -2,11 +2,10 @@ import os
 
 import sqlalchemy
 
+
 class DB(object):
-    uri = None
-    base = None
-    engine = None
-    session = None
+    """Class that represents an DB instance
+    """
 
     def init_connection_engine():
         """This function starts database connection.

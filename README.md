@@ -52,6 +52,31 @@ Ejercicio de una herramienta en la que los usuarios puedan consultar los inmuebl
     SOLUCIONADO:
         - La autodocumentación no se generaba de manera correcta debido a que no estaba activado el ambiente virtual 
         - Instalación del tema "sphinx-rtd-theme"
+    - Usando raw SQL, las validaciones de la cláusula WHERE no funcionan para campo description de property  
+    SQL utilizado para intentar corregirlo (sin funcionar):  
+    ```
+    SELECT * FROM (
+        SELECT
+            p.address as address,
+            p.city as city,
+            p.price as price,
+            case  
+                when p.description = '' then NULL 
+            end as description,
+            s.name as name,
+            p.year as year
+        FROM status_history sh
+        LEFT JOIN status s ON s.id = sh.status_id
+        LEFT JOIN property p ON p.id = sh.property_id
+        WHERE s.name='{}'
+        AND (p.address IS NOT NULL OR p.address <> "")
+        AND (p.year IS NOT NULL OR p.year <> "")
+        AND (p.description IS NOT NULL OR p.description <> "")
+        AND (p.price IS NOT NULL OR p.price <> "0" or p.price <> 0)
+        ORDER BY sh.update_date DESC
+    ) as A
+    WHERE A.description IS NOT NULL;
+    ```
 
 ### Estructura de archivos
 

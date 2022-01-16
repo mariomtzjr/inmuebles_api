@@ -1,10 +1,15 @@
 import json
+from pymysql import NULL
+from sqlalchemy.sql.elements import Null
+
+from sqlalchemy.sql.expression import null
 
 from flask import Flask
 
 from flask_restful import Resource, Api, reqparse
 
 from utils.utils import get_result_from_args
+from utils.util import DBExecutor
 
 app = Flask(__name__)
 api = Api(app)
@@ -32,16 +37,19 @@ class PropertyList(Resource):
         parser.add_argument('status', location='args')
 
         args = parser.parse_args()
-        result = get_result_from_args(args)
+        
+        # result = get_result_from_args(args)  # Using SLQAlchemy ORM
+        query = DBExecutor.get_query(args)
+        result = DBExecutor.execute_query(query)
 
         properties = [
             {
-                "address": row.Property.address,
-                "city": row.Property.city,
-                "price": row.Property.price,
-                "description": row.Property.description,
-                "status": row.Status.name,
-                "anio_construccion": row.Property.year
+                "address": row[0],
+                "city": row[1],
+                "price": row[2],
+                "description": row[3],
+                "status": row[4],
+                "anio_construccion": row[5]
             } for row in result.get("result")
         ]
 
